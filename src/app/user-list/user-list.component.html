@@ -1,0 +1,47 @@
+<div class="spinner">
+  <span *ngIf="!loading" ><mat-spinner></mat-spinner>
+  </span>
+</div>
+
+
+<div class="mat-elevation-z8" *ngIf="loading" [@bounce]>
+  <table mat-table [dataSource]="users">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>name</th>
+      <td mat-cell *matCellDef="let element"  [@a]>{{ element.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>email</th>
+      <td mat-cell *matCellDef="let element" [@b]>{{ element.email }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef>Phone</th>
+      <td mat-cell *matCellDef="let element" [@bounce]>{{ element.phone }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="add">
+      <th mat-header-cell *matHeaderCellDef></th>
+
+      <button mat-cell *matCellDef="let element" (click)="editButton(element)" [@bounce]>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <button
+      [@bounce]
+        mat-cell
+        *matCellDef="let element"
+        (click)="removeTodo(element.id)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
